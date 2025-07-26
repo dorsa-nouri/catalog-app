@@ -9,12 +9,20 @@ export const useProducts = () => {
     return await $fetch(`${BASE_URL}/search?q=${query}`);
   };
 
+  const getCategoryList = async () => {
+    return await $fetch(`${BASE_URL}/category-list`);
+  };
+
   const getByCategory = async (category: string) => {
     return await $fetch(`${BASE_URL}/category/${category}`);
   };
 
   const getById = async (id: number | string) => {
     return await $fetch(`${BASE_URL}/${id}`);
+  };
+
+  const getSorted = async (category: string, order: string) => {
+    return await $fetch(`${BASE_URL}?sortBy=${category}&order=${order}`);
   };
 
   const create = async (product: {
@@ -33,8 +41,10 @@ export const useProducts = () => {
   return {
     getAllProducts,
     search,
+    getCategoryList,
     getByCategory,
     getById,
+    getSorted,
     create,
   };
 };
