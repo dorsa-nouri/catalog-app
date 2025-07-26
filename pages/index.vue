@@ -3,7 +3,7 @@
     <div
       class="flex sm:flex-row flex-col gap-3 w-full items-center justify-between py-5"
     >
-     <div class="flex flex-col sm:flex-row gap-3 items-center">
+      <div class="flex flex-col sm:flex-row gap-3 items-center">
         <FiltersSearch @search="onSearch" />
         <button
           v-if="clearFilterBtn"
@@ -80,10 +80,14 @@
 
   const debouncedFilter = debounce(async (cat: string) => {
     try {
-      const result = await getByCategory(cat);
-      productList.value = result ?? {};
-      localStatus.value = "success";
-      localError.value = "";
+      if (cat === "all") {
+        clearFilters();
+      } else {
+        const result = await getByCategory(cat);
+        productList.value = result ?? {};
+        localStatus.value = "success";
+        localError.value = "";
+      }
     } catch (err) {
       localError.value = (err as Error)?.message || "Unknown error";
       localStatus.value = "error";
