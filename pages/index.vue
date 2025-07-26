@@ -5,6 +5,8 @@
     >
       <div class="flex flex-col sm:flex-row gap-3 items-center">
         <FiltersSearch @search="onSearch" />
+        <FiltersFilter @filter="onFilter" />
+        <FiltersSort @sort="onSort" />
         <button
           v-if="clearFilterBtn"
           @click="clearFilters"
@@ -15,8 +17,16 @@
         </button>
       </div>
       <div class="flex flex-col sm:flex-row gap-3 items-center">
-        <FiltersFilter @filter="onFilter" />
-        <FiltersSort @sort="onSort" />
+        <button
+          @click="showModal = true"
+          class="btn py-2 px-5 bg-blue-600 rounded-xl text-white"
+        >
+          New Product
+        </button>
+        <SharedModalNewProductModal
+          v-model:open="showModal"
+          @submit="handleCreate"
+        />
       </div>
     </div>
 
@@ -30,14 +40,15 @@
 
 <script setup lang="ts">
   import { debounce } from "lodash-es";
-
-  const { getAllProducts, search, getByCategory, getSorted } = useProducts();
+  const { getAllProducts, search, getByCategory, getSorted, create } =
+    useProducts();
 
   const query = ref("");
   const category = ref("");
   const productList = ref([]);
   const localStatus = ref("idle");
   const localError = ref("");
+  const showModal = ref(false);
   const clearFilterBtn = ref(false);
 
   const { data, status, error, refresh } = await useAsyncData(
@@ -119,6 +130,17 @@
       localStatus.value = "success";
       localError.value = "";
       clearFilterBtn.value = true;
+    } catch (err) {
+      localError.value = (err as Error)?.message || "Unknown error";
+      localStatus.value = "error";
+    }
+  };
+
+  const handleCreate = async (form: object) => {
+    try {
+      await create(form);
+      localStatus.value = "success";
+      localError.value = "";
     } catch (err) {
       localError.value = (err as Error)?.message || "Unknown error";
       localStatus.value = "error";

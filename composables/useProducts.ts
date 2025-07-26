@@ -29,7 +29,6 @@ export const useProducts = () => {
     title: string;
     description: string;
     price: number;
-    brand?: string;
     category?: string;
   }) => {
     return await $fetch(BASE_URL + "/add", {

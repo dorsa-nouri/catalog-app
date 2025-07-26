@@ -19,10 +19,19 @@
 
 <script setup lang="ts">
   const { getCategoryList } = useProducts();
+  const selectedCategory = ref("all");
 
-  const categories = await getCategoryList();
-
-  const selectedCategory = ref("");
+  const { data: categories } = await useAsyncData(
+    "product-categories",
+    () => getCategoryList(),
+    {
+      server: true,
+      lazy: false,
+      immediate: true,
+      default: () => [],
+      staleTime: 1000 * 60 * 5, // 5 minutes
+    }
+  );
 
   defineEmits<{
     (e: "filter", category: string): void;
