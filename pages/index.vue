@@ -1,25 +1,42 @@
 <template>
   <div class="bg-gray-50 min-h-screen p-6">
     <div
-      class="flex sm:flex-row flex-col gap-3 w-full items-center justify-between py-5"
+      class="flex flex-col sm:flex-row gap-4 w-full items-stretch sm:items-center sm:justify-between py-5"
     >
-      <div class="flex flex-col sm:flex-row gap-3 items-center">
-        <FiltersSearch @search="onSearch" />
-        <FiltersFilter @filter="onFilter" />
-        <FiltersSort @sort="onSort" />
+      <!-- filters -->
+      <div
+        class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center"
+      >
+        <FiltersSearch
+          @search="onSearch"
+          class="w-full sm:w-auto"
+        />
+        <FiltersFilter
+          @filter="onFilter"
+          class="w-full sm:w-auto"
+        />
+        <FiltersSort
+          @sort="onSort"
+          class="w-full sm:w-auto"
+        />
+
         <button
           v-if="clearFilterBtn"
           @click="clearFilters"
-          class="text-gray-600 px-5 py-2 border rounded-xl"
+          class="text-gray-600 px-5 py-2 border rounded-xl w-full sm:w-auto"
           aria-label="Clear search"
         >
           Clear Filters
         </button>
       </div>
-      <div class="flex flex-col sm:flex-row gap-3 items-center">
+
+      <!-- new product -->
+      <div
+        class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center mt-3 sm:mt-0"
+      >
         <button
           @click="showModal = true"
-          class="btn py-2 px-5 bg-blue-600 rounded-xl text-white"
+          class="btn py-2 px-5 bg-blue-600 rounded-xl text-white w-full sm:w-auto"
         >
           New Product
         </button>

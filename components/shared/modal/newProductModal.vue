@@ -5,10 +5,9 @@
       class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center"
     >
       <div
-        class="bg-white rounded-2xl shadow-xl w-full max-w-xl p-6 relative"
+        class="bg-white rounded-2xl shadow-xl w-full max-w-xl p-6 relative sm:h-auto h-screen"
         @click.stop
       >
-        <!-- Close Button -->
         <button
           class="absolute top-3 right-3 text-gray-500 hover:text-black"
           @click="emit('update:open', false)"
@@ -16,10 +15,8 @@
           ✕
         </button>
 
-        <!-- Header -->
         <h2 class="text-xl font-bold mb-4">Create New Product</h2>
 
-        <!-- Form -->
         <form
           @submit.prevent="submitForm"
           class="space-y-4"
@@ -70,7 +67,9 @@
             ></textarea>
           </div>
 
-          <div class="flex justify-end gap-2 pt-4">
+          <div
+            class="flex sm:flex-row flex-col justify center w-auto sm:justify-end gap-2 pt-4"
+          >
             <button
               type="button"
               @click="emit('update:open', false)"
