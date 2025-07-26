@@ -25,7 +25,7 @@ const emit = defineEmits<{
 }>();
 
 const emitSort = () => {
-  const [sortBy, direction] = selected.value.split("-");
+  const [sortBy, direction] = selected.value?.split("-");
   emit("sort", sortBy, direction as 'asc' | 'desc');
 };
 </script>

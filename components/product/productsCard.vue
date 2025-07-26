@@ -13,7 +13,7 @@
       <img
         :src="details?.thumbnail"
         :alt="details?.title"
-        class="w-full h-48 object-cover"
+        class="w-full h-48 object-contain"
       />
       <div class="p-4">
         <h3 class="text-lg font-semibold text-gray-700 truncate">

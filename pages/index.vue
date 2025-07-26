@@ -95,7 +95,7 @@
   }, 500);
 
   const onSearch = (q: string) => {
-    query.value = q.trim();
+    query.value = q?.trim();
     category.value = "";
     localStatus.value = "loading";
     localError.value = null;

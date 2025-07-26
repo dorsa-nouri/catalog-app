@@ -1,7 +1,7 @@
 <template>
-  <div class=" flex flex-col items-center">
+  <div class="flex flex-col items-center">
     <NuxtLayout>
-      <NuxtLoadingIndicator color="#bb133e" />
+      <NuxtLoadingIndicator color="#00CFFF" />
       <NuxtPage />
     </NuxtLayout>
   </div>
